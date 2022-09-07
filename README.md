@@ -5,7 +5,7 @@
 🇧🇷Idioma:  pt-br
 
 ### 📌 CONTEXTO
-esse
+
 ---
 
 Sistemas de software são passivos de falhas, um vez que inconsistências e erros podem ser incorporados, de forma não

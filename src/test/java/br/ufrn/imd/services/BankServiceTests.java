@@ -1,12 +1,11 @@
 package br.ufrn.imd.services;
 
 import br.ufrn.imd.models.BankAccount;
+import br.ufrn.imd.models.BankAccountResult;
 import br.ufrn.imd.models.BankAccountTestFixture;
 import br.ufrn.imd.repositories.Repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
-
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,8 +40,8 @@ public class BankServiceTests {
 
     @Test
     public void testDeposit(){
-        var account = repository.get(UUID.randomUUID().toString());
-        var result = bankService.deposit(account, 1000);
+        BankAccount account = repository.get(UUID.randomUUID().toString());
+        final BankAccountResult result = bankService.deposit(account, 1000);
 
         // Assets
         assertTrue(result.getBankAccount().isPresent());
@@ -54,9 +53,9 @@ public class BankServiceTests {
 
     @Test
     public void testDepositException(){
-        var account = repository.get(UUID.randomUUID().toString());
+        final BankAccount account = repository.get(UUID.randomUUID().toString());
         when(repository.update(account)).thenThrow();
-        var result = bankService.deposit(account, 1000);
+        final BankAccountResult result = bankService.deposit(account, 1000);
 
         assertTrue(result.getBankAccount().isEmpty());
         verify(repository).update(any(BankAccount.class));
